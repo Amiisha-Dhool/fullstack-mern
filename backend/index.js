@@ -1,6 +1,9 @@
 import express from 'express';
 import helmet from 'helmet';
 
+//laynkan hose waa kii idin dhaxaynayay adiga iyo mango db
+import dns from 'node:dns';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,6 +13,8 @@ import tasksRoute from './routes/tasks.js';
 import uploadRoutes from './routes/upload.js';
 import userRoutes from './routes/users.js';
 
+
+
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -18,6 +23,10 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { notFound } from './middlewares/notfound.js';
 
 dotenv.config();
+
+//lapadan layn waxay kaa cawinayan inay isku kiin xidhan codeka iyo mango 
+console.log(dns)
+dns.setServers(['1.1.1.1', '1.0.0.1']); 
 
 import swaggerUi from 'swagger-ui-express';
 import { limiter } from './middlewares/rateLimiter.js';
@@ -87,7 +96,6 @@ app.use(notFound);
 app.use(errorHandler);
 
 
-// connect to mongodb
 
 mongoose.connect(process.env.NODE_ENV == "development" ? process.env.MONGO_URI_DEV : process.env.MONGO_URI_PRO)
     .then(() => console.log("✅ MongoDB connected locally"))
@@ -96,3 +104,4 @@ mongoose.connect(process.env.NODE_ENV == "development" ? process.env.MONGO_URI_D
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })
+
