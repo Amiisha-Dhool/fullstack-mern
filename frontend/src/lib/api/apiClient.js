@@ -1,7 +1,8 @@
 import axios from "axios";
 import useAuthStore from "../store/authStore";
 
-const API_URL = "https://mentorship-api-jys6.onrender.com/api";
+
+const API_URL = "https://fullstack-mern-ean9.onrender.com/api";
 
 const api = axios.create({
     baseURL: API_URL,
