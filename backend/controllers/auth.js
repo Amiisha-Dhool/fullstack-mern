@@ -32,7 +32,12 @@ export const login = async (req, res, next) => {
 
     try {
 
-        email = email.toLowerCase();
+       
+        
+
+    console.log("Request Body:", req.body);
+
+    email = email.toLowerCase();
 
         const user = await User.findOne({ email });
 
@@ -47,6 +52,7 @@ export const login = async (req, res, next) => {
         res.json({ token, user })
 
     } catch (err) {
-        next(err)
-    }
+    console.log("LOGIN ERROR:", err);
+    next(err);
+}
 }
